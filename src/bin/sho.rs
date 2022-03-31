@@ -1,7 +1,7 @@
-mod ode;
-mod physics;
-use ode::{OdeSolver, SolverType};
-use physics::sho;
+use orbits::ode::{OdeSolver, SolverType};
+use orbits::physics::sho;
+
+
 
 fn main() {
     const MAX: usize = 1000;

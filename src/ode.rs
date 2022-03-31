@@ -1,29 +1,37 @@
+#[derive(Debug)]
 pub enum SolverType {
     Euler,
     Rk2,
     Rk4,
 }
 
-pub struct OdeSolver<'a> {
+#[derive(Debug)]
+pub struct OdeSolver<'a, F> 
+where
+    F: Fn(&Vec<f64>, f64, &Vec<f64>) -> f64
+{
     x: &'a mut Vec<Vec<f64>>,
     t: &'a mut Vec<f64>,
-    dxdt: &'a Vec<fn(&Vec<f64>, f64, &Vec<f64>) -> f64>,
+    dxdt: &'a Vec<F>,
     params: &'a Vec<f64>,
     dt: f64,
     steps: usize,
     solver_type: SolverType,
 }
 
-impl<'a> OdeSolver<'a> {
+impl<'a, F> OdeSolver<'a, F> 
+where
+    F: Fn(&Vec<f64>, f64, &Vec<f64>) -> f64
+{
     pub fn new(
         x: &'a mut Vec<Vec<f64>>,
         t: &'a mut Vec<f64>,
-        dxdt: &'a Vec<fn(&Vec<f64>, f64, &Vec<f64>) -> f64>,
+        dxdt: &'a Vec<F>,
         params: &'a Vec<f64>,
         dt: f64,
         steps: usize,
         solver_type: SolverType,
-    ) -> OdeSolver<'a> {
+    ) -> OdeSolver<'a, F> {
         OdeSolver {
             x,
             t,

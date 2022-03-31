@@ -3,6 +3,16 @@ name = "orbits"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "sho"
+path = "src/bin/sho.rs"
+
+[[bin]]
+name = "circular"
+path = "src/bin/circular.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+rand = "0.8.5"
+scan_fmt = "0.2.6"
